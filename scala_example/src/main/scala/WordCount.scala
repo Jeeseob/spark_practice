@@ -1,9 +1,8 @@
 import org.apache.spark.{SparkConf, SparkContext}
 import org.apache.spark.sql.SparkSession
 
-object Main {
+object WordCount {
   def main(args: Array[String]): Unit = {
-
     val conf = new SparkConf().setMaster("local").setAppName("wordCount")
     val sc = new SparkContext(conf)
 
