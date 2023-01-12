@@ -29,15 +29,22 @@ object AccumulatorExample {
       .as[Flight](Encoders.product[Flight])
     flights.show()
 
+    Thread.sleep(1000)
+
     val accChina = new LongAccumulator
     spark.sparkContext.register(accChina, "China")
     flights.foreach(flight => accChinaFunc(flight, accChina))
     println(accChina.value) // 953
 
+    Thread.sleep(1000)
 
+    // Custom Accumulator
     val acc = new EvenAccumulator
     spark.sparkContext.register(acc, "evenAcc")
     flights.foreach(flight => acc.add(flight.count))
     println(acc.value()) // 31390
+
+
+    Thread.sleep(100000)
   }
 }
